@@ -5,6 +5,21 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  if(to.fullPath === '/')  {
+    if(localStorage.getItem('userId')) {
+      console.log("You,ve already logged in")
+      next('/lobby')
+    } else 
+     next();
+  } 
+  else if(!localStorage.getItem('userId')) {
+    next('/');
+  } else {
+     next();
+  }
+})
+
 new Vue({
   router,
   store,
