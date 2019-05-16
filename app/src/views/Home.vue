@@ -1,22 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <div>Home</div>
+  <div class="landing">
+    <div class="univbg border">
+      <div style="background-color:black;" class="black container my-5">
+        <h1>Nama Game</h1>
+        <login class="noopacity"></login>
+
+        <button v-on:click.prevent="lobby">Start Now</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// firebase.db = firestore
-// firebase.auth = auth
-import firebase from '@/firebase/index'
-
+import login from '@/components/Login'
 export default {
-  name: 'home',
-  components: {
-
+  name: "home",
+  components: {login},
+  data() {
+    return {
+      lobby() {
+        this.$router.push('/lobby')
+      }
+    }
   },
-  created() {
-  }
-}
+};
 </script>
+
+<style>
+
+
+.black {
+  height: 80vh;
+  opacity: 0.8;
+}
+.univbg {
+  background: url('../../public/landing1.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  background-position: center center;
+  position: relative;
+}
+</style>
