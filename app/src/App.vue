@@ -4,6 +4,33 @@
   </div>
 </template>
 
+<script>
+
+import { mapMutations } from 'vuex'
+
+export default {
+  name: 'App',
+  created() {
+    if(localStorage.getItem('userId')) {
+      this.setLogin();
+    } else {
+      this.setLogout();
+    };
+  },
+  data() {
+    return {
+
+    }
+  },
+  methods:{
+    ...mapMutations([
+      'setLogin',
+      'setLogout',
+    ]),
+  }
+
+}
+</script>
 
 <style>
 
