@@ -55,8 +55,8 @@
     <router-view/>
   </div>
 </template>
-
 <script>
+
 import firebase from "firebase";
 import _firebase from "@/firebase/index";
 import { mapMutations } from "vuex";
@@ -121,7 +121,10 @@ export default {
   font-family: "Pixel Digivolve";
   src: url("../public/Pixel Digivolve.otf");
 }
-
+@font-face {
+  font-family: "Reactor7";
+  src: url("../public/Reactor7.otf");
+}
 .navbar {
   background: transparent;
 }
