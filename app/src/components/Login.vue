@@ -60,7 +60,7 @@ export default {
             localStorage.setItem('email', response.user.email);
             this.loginEmail = '';
             this.loginPassword = '';
-            this.$router.push({ name: 'lobby' });
+            this.$router.push({ name: 'waitinglobby' });
           })
           .catch((error) => {
             console.log(error);
