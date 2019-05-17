@@ -14,9 +14,19 @@ export default new Router({
       component: Home
     },
     {
+      path: '/waitinglobby',
+      name: 'waitinglobby',
+      component: () => import(/* webpackChunkName: "WaitingLobby" */ './views/WaitingLobby.vue')
+    },
+    {
       path: '/lobby',
       name: 'lobby',
       component: () => import(/* webpackChunkName: "lobby" */ './views/Lobby.vue')
+    },
+    {
+      path: '/battleview',
+      name: 'battleview',
+      component: () => import(/* webpackChunkName: "lobby" */ './views/Battleview.vue')
     }
   ]
 })
