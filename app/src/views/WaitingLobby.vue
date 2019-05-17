@@ -9,19 +9,19 @@
 
 <script>
 import _firebase from "@/firebase/index";
-import RoomCard from '@/components/RoomCard';
+import RoomCard from "@/components/RoomCard";
 
 const db = _firebase.db;
-const roomRef = db.collection('rooms');
+const roomRef = db.collection("rooms");
 
 export default {
-  name: 'WaitingLobby',
+  name: "WaitingLobby",
   components: {
-    RoomCard,
+    RoomCard
   },
   data() {
     return {
-      inputPin: '',
+      inputPin: "",
       roomList: [],
       monsterList: []
     };
@@ -32,14 +32,13 @@ export default {
   methods: {
     getRooms() {
       let rooms = [];
-        roomRef
-          .onSnapshot((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              let room = { id: doc.id, ...doc.data() };
-              rooms.push(room);
-            })
-            this.roomList = [...rooms];
-          });
+      roomRef.onSnapshot(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let room = { id: doc.id, ...doc.data() };
+          rooms.push(room);
+        });
+        this.roomList = [...rooms];
+      });
     },
 
     getMons() {
@@ -66,22 +65,15 @@ export default {
           console.log(err);
         });
     }
-  },
-  watch: {
-    roomList: {
-      handler: 'getRooms',
-      immediate: true,
-    }
   }
 };
 </script>
 
 <style>
-
-.txtop{
-  font-family: 'Pixel Digivolve';
-  font-size:5rem;
-  color:black;
+.txtop {
+  font-family: "Pixel Digivolve";
+  font-size: 5rem;
+  color: black;
   text-align: center;
 }
 </style>

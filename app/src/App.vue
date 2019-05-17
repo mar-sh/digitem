@@ -30,7 +30,7 @@
             <form>
               <div class="form-group">
                 <label class="col-form-label">Room Name:</label>
-                <input type="text" v-model="roomName" class="form-control" >
+                <input type="text" v-model="roomName" class="form-control">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Enter Pin:</label>
@@ -62,8 +62,8 @@ import _firebase from "@/firebase/index";
 import { mapMutations } from "vuex";
 
 const db = _firebase.db;
-const auth = firebase.auth;
-const roomRef = db.collection('rooms');
+const auth = _firebase.auth;
+const roomRef = db.collection("rooms");
 
 export default {
   name: "App",
@@ -101,11 +101,11 @@ export default {
           name: this.roomName,
           pin: this.roomPin,
           players: [localStorage.getItem("email")],
-          owner: localStorage.getItem("email"),
+          owner: localStorage.getItem("email")
         })
         .then(doc => {
-          this.roomName = '';
-          this.roomPin = '';
+          this.roomName = "";
+          this.roomPin = "";
           this.$router.push({ name: "room", params: { id: doc.id } });
         })
         .catch(err => {
