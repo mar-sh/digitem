@@ -28,18 +28,31 @@
 
 <script>
 // @ is an alias to /src
+import firebase from '@/firebase/index';
 import actionCard from "@/components/ActionCard";
 import card from "../components/Card";
+
+const db = firebase.db;
+const roomRef = db.collection('rooms');
+const monsRef = db.collection('monsters');
+
 export default {
   name: "game",
   components: {
     actionCard,
     card
   },
+   async created() {
+   this.fetchMonster();
+   this.getRoom();
+ },
   data() {
     return {
       lobby: false,
       game: true,
+      allmons: [],
+      players: [],
+      room: {},
       monsters: [
         { name: "Fiery Girl", url: "../one.gif" },
         { name: "Badass-looking Monster", url: "../two.gif" },
@@ -53,6 +66,34 @@ export default {
         { name: "Event Listener", url: "../ten.gif" }
       ]
     };
+  },
+  methods: {
+    async fetchMonster() {
+      const allmons = [];
+      const monstersSnapshot = await monsRef.get();
+
+      monstersSnapshot.forEach(monsterDoc => {
+        const monster = monsterDoc.data();
+        const skills = [];
+        monster.skill.forEach(async skillDoc => {
+          const skill = await skillDoc.get();
+          const skillData = skill.data();
+          skills.push(skillData);
+        });
+      allmons.push({ ...monster, id: monsterDoc.id, skill: skills });
+   })
+
+   this.allmons = allmons;
+    },
+
+    getRoom() {
+      roomRef.doc(this.$route.params.id)
+        .onSnapshot((doc) => {
+          this.room = { id: doc.id, ...doc.data()};
+          this.players = [...doc.data().players];
+        });
+    },
+
   }
 };
 </script>

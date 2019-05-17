@@ -2,7 +2,7 @@
   <div class="container border px-5 py-5 my-5">
     <h2 class="txtop">MEET YOUR OPPONENT</h2>
     <div class="row">
-      <RoomCard v-for="room in roomList" :key="room.id" :room="room"></RoomCard>
+      <RoomCard v-for="(room, index) in roomList" :key="index" :room="room"></RoomCard>
     </div>
   </div>
 </template>
