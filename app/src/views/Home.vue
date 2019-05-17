@@ -42,9 +42,8 @@ export default {
 };
 </script>
 
+
 <style>
-
-
 .titleop {
   font-family: 'Pixel Digivolve';
   font-size:6rem;
@@ -53,12 +52,11 @@ export default {
   margin-top:10vh
 
 }
-
 .black {
   height: 80vh;
 }
 .univbg {
-  background: url('../../public/landing1.gif');
+  background: url("../../public/landing1.gif");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
