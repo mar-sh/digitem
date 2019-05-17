@@ -26,12 +26,11 @@ export default {
   data() {
     return {
       toggle: false,
-      // lobby() {
-      //   this.$router.push('/lobby')
-      // }
+     
     }
   },
   methods: {
+    
     goRegister() {
       this.toggle = false;
     },

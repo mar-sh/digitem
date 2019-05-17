@@ -7,25 +7,19 @@
     <div class="card-img-overlay act">
       <div class="row">
         <div class="col">
-          <h5>Player 1</h5>
+          <h5>{{monsters.name}}</h5>
           <ul>
-            <li>
-              <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
-              <a href="#">Fart</a>
-            </li>
-            <li>
-              <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
-              <a href="#">Lick</a>
-            </li>
-            <li>
-              <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
-              <a href="#">Flee</a>
-            </li>
+            <div v-for="(skill, index) in monsters.skill" :key="index">
+              <li>
+                <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
+                <a v-on:click="attackmusuh(monsters.att)"  href="#">{{skill.name}}</a>
+              </li>
+            </div>
           </ul>
         </div>
         <div class="col">
           <ul>
-            <li>Hp: 234/245</li>
+            <li>Hp: {{monsters.hp}}/{{hp}}</li>
             <li>Mp: 92/99</li>
           </ul>
         </div>
@@ -47,7 +41,23 @@ window.onload = function() {
     });
   }
 };
-export default {};
+export default {
+  props: ["monsters"],
+  data() {
+    return {};
+  },
+  methods: {
+    attackmusuh(val) {
+      console.log(val);
+      
+    }
+  },
+  computed: {
+    hp() {
+      return this.monsters.hp;
+    }
+  }
+};
 </script>
 
 <style>

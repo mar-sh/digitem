@@ -4,22 +4,26 @@
       <div class="fixed-bottom">
         <div class="container">
           <div class="d-flex justify-content-between pb-1">
-            <img src="/three.gif" height="500px" alt class="player1">
-            <img src="/two.gif" height="500px" alt>
+            <img :src="monsters[0].url.slice(2)" height="500px" alt class="player1">
+            <img :src="monsters[1].url.slice(2)" height="500px" alt>
           </div>
         </div>
       </div>
       <div class="fixed-bottom actions">
         <div class="d-flex justify-content-between">
-          <actionCard/>
-          <actionCard/>
+          <actionCard
+          v-bind:monsters="monsters[0]"
+          ></actionCard>
+           <actionCard
+          v-bind:monsters="monsters[1]"
+          ></actionCard>
         </div>
       </div>
     </div>
-    <div class="lobby" v-if="lobby">
+    <div class="lobby" v-else>
       <div class="container">
         <div class="row py-5">
-          <card v-for="(i, index) in monsters" :monsters="monsters[index]" :key="index"></card>
+          <card v-on:habismilih="selectedMon" v-for="(i, index) in monsterslocal" :monsters="monsterslocal[index]" :key="index"></card>
         </div>
       </div>
     </div>
@@ -28,11 +32,12 @@
 
 <script>
 // @ is an alias to /src
-import firebase from '@/firebase/index';
+import _firebase from '@/firebase/index';
+import firebase from 'firebase'
 import actionCard from "@/components/ActionCard";
 import card from "../components/Card";
 
-const db = firebase.db;
+const db = _firebase.db;
 const roomRef = db.collection('rooms');
 const monsRef = db.collection('monsters');
 
@@ -48,12 +53,13 @@ export default {
  },
   data() {
     return {
-      lobby: false,
-      game: true,
+      lobby: true,
+      game: false,
       allmons: [],
       players: [],
+      monsters: [],
       room: {},
-      monsters: [
+      monsterslocal: [
         { name: "Fiery Girl", url: "../one.gif" },
         { name: "Badass-looking Monster", url: "../two.gif" },
         { name: "Gabutmon", url: "../three.gif" },
@@ -68,6 +74,20 @@ export default {
     };
   },
   methods: {
+    selectedMon(mon)  {
+      console.log(this.allmons, '?');
+      let monsta = this.allmons.filter(x => x.name == mon.name)
+      localStorage.setItem('monsterName', mon.name)
+      console.log(this.$route.params.id, '????');
+      console.log(monsta[0], 'asasasas????');
+      
+      let obj = {
+        hp : monsta
+      }
+      roomRef.doc(this.$route.params.id).update({
+        monsters : firebase.firestore.FieldValue.arrayUnion({...monsta[0], url : mon.url})
+      })
+    },
     async fetchMonster() {
       const allmons = [];
       const monstersSnapshot = await monsRef.get();
@@ -84,16 +104,27 @@ export default {
    })
 
    this.allmons = allmons;
-    },
-
+  },
     getRoom() {
       roomRef.doc(this.$route.params.id)
         .onSnapshot((doc) => {
           this.room = { id: doc.id, ...doc.data()};
-          this.players = [...doc.data().players];
+          this.players = doc.data().players
+          this.monsters = doc.data().monsters
         });
     },
-
+  
+  },
+  watch: {
+    monsters: function(value) {
+      if(value.length >= 2 ) {
+        this.game = true;
+        this.lobby = false;
+      } else {
+          this.lobby = true;
+          this.game = false;
+      }
+    }
   }
 };
 </script>

@@ -101,12 +101,13 @@ export default {
           name: this.roomName,
           pin: this.roomPin,
           players: [localStorage.getItem("email")],
-          owner: localStorage.getItem("email")
+          owner: localStorage.getItem("email"),
+          monsters : [],
         })
         .then(doc => {
           this.roomName = "";
           this.roomPin = "";
-          this.$router.push({ name: "room", params: { id: doc.id } });
+          this.$router.push({ name: "game", params: { id: doc.id } });
         })
         .catch(err => {
           console.log(err);
