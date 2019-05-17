@@ -4,15 +4,15 @@
       <div class="fixed-bottom">
         <div class="container">
           <div class="d-flex justify-content-between pb-1">
-            <img src="/three.gif" height="500px" alt class="player1">
-            <img src="/two.gif" height="500px" alt>
+            <img id="mons1" src="/three.gif" height="500px" alt class="player1">
+            <img id="mons2" src="/two.gif" height="500px" alt>
           </div>
         </div>
       </div>
       <div class="fixed-bottom actions">
         <div class="d-flex justify-content-between">
-          <actionCard/>
-          <actionCard/>
+          <actionCard @skillclicked="animatePlayer1" @flee="fleeP1"/>
+          <actionCard @skillclicked="animatePlayer2" @flee="fleeP2"/>
         </div>
       </div>
     </div>
@@ -30,6 +30,7 @@
 // @ is an alias to /src
 import actionCard from "@/components/ActionCard";
 import card from "../components/Card";
+import { setTimeout } from "timers";
 export default {
   name: "game",
   components: {
@@ -53,6 +54,44 @@ export default {
         { name: "Event Listener", url: "../ten.gif" }
       ]
     };
+  },
+  methods: {
+    animatePlayer1() {
+      console.log("masuk game");
+      const monst1 = document.getElementById("mons1");
+      const monst2 = document.getElementById("mons2");
+      monst1.classList.add("animated", "jello");
+      setTimeout(() => {
+        monst2.classList.add("animated", "wobble");
+      }, 1000);
+      setTimeout(() => {
+        monst1.classList.remove("animated", "jello");
+        monst2.classList.remove("animated", "wobble");
+      }, 2000);
+    },
+    animatePlayer2() {
+      console.log("masuk game");
+      const monst1 = document.getElementById("mons1");
+      const monst2 = document.getElementById("mons2");
+      monst2.classList.add("animated", "jello");
+      setTimeout(() => {
+        monst1.classList.add("animated", "wobble");
+      }, 1000);
+      setTimeout(() => {
+        monst2.classList.remove("animated", "jello");
+        monst1.classList.remove("animated", "wobble");
+      }, 2000);
+    },
+    fleeP1() {
+      console.log("masuk game");
+      const monst1 = document.getElementById("mons1");
+      monst1.classList.add("animated", "bounceOutLeft");
+    },
+    fleeP2() {
+      console.log("masuk game");
+      const monst2 = document.getElementById("mons2");
+      monst2.classList.add("animated", "bounceOutRight");
+    }
   }
 };
 </script>

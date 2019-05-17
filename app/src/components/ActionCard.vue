@@ -2,7 +2,7 @@
   <div style="max-width:50vw;" class="border-0 mx-2 my-2 card bg-dark text-white">
     <img src="/actionbg.png" class="card-img">
     <audio id="cursorSound">
-      <source src="selectSound.mp3">
+      <source src="/selectSound.mp3">
     </audio>
     <div class="card-img-overlay act">
       <div class="row">
@@ -10,16 +10,16 @@
           <h5>Player 1</h5>
           <ul>
             <li>
-              <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
-              <a href="#">Fart</a>
+              <img src="/cursor.png" height="30px" class="animated infinite pulse cursor">
+              <a href="#" class="skill1" @click="onclicked">Fart</a>
             </li>
             <li>
-              <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
-              <a href="#">Lick</a>
+              <img src="/cursor.png" height="30px" class="animated infinite pulse cursor">
+              <a href="#" @click="onclicked">Lick</a>
             </li>
             <li>
-              <img src="cursor.png" height="30px" class="animated infinite pulse cursor">
-              <a href="#">Flee</a>
+              <img src="/cursor.png" height="30px" class="animated infinite pulse cursor">
+              <a href="#" @click="flee">Flee</a>
             </li>
           </ul>
         </div>
@@ -35,19 +35,31 @@
 </template>
 
 <script>
-window.onload = function() {
-  let context = new AudioContext();
-  var audio = document.getElementById("cursorSound");
-  let list = document.getElementsByTagName("ul");
-  for (var li in list) {
-    list[li].addEventListener("mouseover", function() {
-      context.resume().then(() => {
-        audio.play();
-      });
-    });
+// window.onload = function() {
+//   let context = new AudioContext();
+//   var audio = document.getElementById("cursorSound");
+//   let list = document.getElementsByTagName("ul");
+//   for (var li in list) {
+//     list[li].addEventListener("mouseover", function() {
+//       context.resume().then(() => {
+//         audio.play();
+//       });
+//     });
+//   }
+//   let skills = document.getElementById("skill1");
+//   skills.addEventListener("click", function() {});
+// };
+export default {
+  methods: {
+    onclicked() {
+      console.log("masuk");
+      this.$emit("skillclicked");
+    },
+    flee() {
+      this.$emit("flee");
+    }
   }
 };
-export default {};
 </script>
 
 <style>
