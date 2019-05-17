@@ -13,29 +13,27 @@
 
 <script>
 // @ is an alias to /src
-import login from '@/components/Login'
+import login from "@/components/Login";
 export default {
   name: "home",
-  components: {login},
+  components: { login },
   data() {
     return {
       lobby() {
-        this.$router.push('/lobby')
+        this.$router.push("/lobby");
       }
-    }
-  },
+    };
+  }
 };
 </script>
 
-<style>
-
-
+<style scoped>
 .black {
   height: 80vh;
   opacity: 0.8;
 }
 .univbg {
-  background: url('../../public/landing1.gif');
+  background: url("../../public/landing1.gif");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
