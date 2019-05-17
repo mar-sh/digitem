@@ -1,47 +1,47 @@
 <template>
   <div class="container border px-5 py-5 my-5">
     <h2 class="txtop">MEET YOUR OPPONENT</h2>
-
     <div class="row">
-      <div v-for="(i, index) in 6" :key="index" class="col-3 py-2"> 
-        <div class="card px-3 py-3">
-          <div class="card-body">
-            <h5 class="card-title">Nama room</h5>
-
-            <p class="card-text">Get ready and enter your pin</p>
-            <div class="input-group mb-3 my-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Pin</span>
-              </div>
-              <input
-                type="text"
-                class="form-control"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default"
-              >
-            </div>
-            <center>
-              <a href class="btn btn-success">FIGHT</a>
-            </center>
-          </div>
-        </div>
-      </div>
+      <RoomCard v-for="room in roomList" :key="room.id" :room="room"></RoomCard>
     </div>
   </div>
 </template>
 
 <script>
 import _firebase from "@/firebase/index";
+import RoomCard from '@/components/RoomCard';
 
 const db = _firebase.db;
+const roomRef = db.collection('rooms');
 
 export default {
+  name: 'WaitingLobby',
+  components: {
+    RoomCard,
+  },
   data() {
     return {
+      inputPin: '',
+      roomList: [],
       monsterList: []
     };
   },
+  created() {
+    this.getRooms();
+  },
   methods: {
+    getRooms() {
+      let rooms = [];
+        roomRef
+          .onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              let room = { id: doc.id, ...doc.data() };
+              rooms.push(room);
+            })
+            this.roomList = [...rooms];
+          });
+    },
+
     getMons() {
       const db = firebase.firestore();
       let monsterList = [];
@@ -65,6 +65,12 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    }
+  },
+  watch: {
+    roomList: {
+      handler: 'getRooms',
+      immediate: true,
     }
   }
 };

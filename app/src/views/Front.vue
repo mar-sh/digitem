@@ -54,22 +54,7 @@ export default {
       })
     },
 
-    createRoom() {
-      
-      const roomName = Math.random().toString(32).substring(5);
-      roomRef.add({
-        name: roomName,
-        players: [localStorage.getItem('email')],
-        owner: localStorage.getItem('email')
-      })
-        .then((doc) => {
-          this.$router.push({name: 'room', params: {id: doc.id}});
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-
-    },
+    
      joinRoom(id) {
 
        roomRef.doc(id)
