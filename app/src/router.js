@@ -23,21 +23,6 @@ export default new Router({
       component: () => import( /* webpackChunkName: "game" */ './views/Game.vue')
     },
     {
-      path: '/lobby',
-      name: 'lobby',
-      component: () => import( /* webpackChunkName: "lobby" */ './views/Lobby.vue')
-    },
-    {
-      path: '/front',
-      name: 'front',
-      component: () => import( /* webpackChunkName: 'front' */ './views/Front.vue')
-    },
-    {
-      path: '/room/:id',
-      name: 'room',
-      component: () => import( /* webpackChunkName: 'front' */ './views/Room.vue')
-    },
-    {
       path: '/battleview',
       name: 'battleview',
       component: () => import( /* webpackChunkName: "lobby" */ './views/Battleview.vue')
