@@ -1,6 +1,6 @@
 <template>
   <div style="max-width:50vw;" class="border-0 mx-2 my-2 card bg-dark text-white">
-    <img src="actionbg.png" class="card-img">
+    <img src="/actionbg.png" class="card-img">
     <audio id="cursorSound">
       <source src="selectSound.mp3">
     </audio>

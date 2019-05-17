@@ -1,17 +1,26 @@
 <template>
-  <div class="landing">
-    <div class="fixed-bottom">
-      <div class="container">
-        <div class="d-flex justify-content-between pb-1">
-          <img src="three.gif" height="500px" alt class="player1">
-          <img src="two.gif" height="500px" alt>
+  <div>
+    <div class="game" v-if="game">
+      <div class="fixed-bottom">
+        <div class="container">
+          <div class="d-flex justify-content-between pb-1">
+            <img src="/three.gif" height="500px" alt class="player1">
+            <img src="/two.gif" height="500px" alt>
+          </div>
+        </div>
+      </div>
+      <div class="fixed-bottom actions">
+        <div class="d-flex justify-content-between">
+          <actionCard/>
+          <actionCard/>
         </div>
       </div>
     </div>
-    <div class="fixed-bottom actions">
-      <div class="d-flex justify-content-between">
-        <actionCard/>
-        <actionCard/>
+    <div class="lobby" v-if="lobby">
+      <div class="container">
+        <div class="row py-5">
+          <card v-for="(i, index) in monsters" :monsters="monsters[index]" :key="index"></card>
+        </div>
       </div>
     </div>
   </div>
@@ -20,16 +29,29 @@
 <script>
 // @ is an alias to /src
 import actionCard from "@/components/ActionCard";
+import card from "../components/Card";
 export default {
   name: "game",
   components: {
-    actionCard
+    actionCard,
+    card
   },
   data() {
     return {
-      lobby() {
-        this.$router.push("/lobby");
-      }
+      lobby: false,
+      game: true,
+      monsters: [
+        { name: "Fiery Girl", url: "../one.gif" },
+        { name: "Badass-looking Monster", url: "../two.gif" },
+        { name: "Gabutmon", url: "../three.gif" },
+        { name: "Sea Doggo", url: "../four.gif" },
+        { name: "Security", url: "../five.gif" },
+        { name: "Strong Dude", url: "../six.gif" },
+        { name: "Kawaii Hammy", url: "../seven.gif" },
+        { name: "Violet Poop", url: "../eight.gif" },
+        { name: "Punk Wolf", url: "../nine.gif" },
+        { name: "Event Listener", url: "../ten.gif" }
+      ]
     };
   }
 };
@@ -44,7 +66,7 @@ export default {
   filter: FlipH;
   -ms-filter: "FlipH";
 }
-.landing {
+.game {
   background: url("../../public/BG.gif") no-repeat center center fixed;
   height: 100vh;
   -webkit-background-size: cover;
@@ -58,5 +80,14 @@ export default {
 
 .actions h1 {
   color: black;
+}
+.lobby {
+  background: url(../../public/bg3.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 200vh;
+  background-position: center center;
+  position: relative;
 }
 </style>

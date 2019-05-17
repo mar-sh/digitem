@@ -1,5 +1,5 @@
 <template>
-  <div class="top">
+  <div class="lobby">
     <div class="container">
       <div class="row py-5">
         <card v-for="(i, index) in monsters" :monsters="monsters[index]" :key="index"></card>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style>
-.top {
+.lobby {
   background: url(../../public/bg3.gif);
   background-repeat: no-repeat;
   background-size: cover;

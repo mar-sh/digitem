@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Game from './views/Game.vue'
 
 Vue.use(Router)
 
@@ -16,12 +15,17 @@ export default new Router({
     {
       path: '/waitinglobby',
       name: 'waitinglobby',
-      component: () => import(/* webpackChunkName: "WaitingLobby" */ './views/WaitingLobby.vue')
+      component: () => import( /* webpackChunkName: "WaitingLobby" */ './views/WaitingLobby.vue')
+    },
+    {
+      path: '/game/:id',
+      name: 'game',
+      component: () => import( /* webpackChunkName: "game" */ './views/Game.vue')
     },
     {
       path: '/lobby',
       name: 'lobby',
-      component: () => import(/* webpackChunkName: "lobby" */ './views/Lobby.vue')
+      component: () => import( /* webpackChunkName: "lobby" */ './views/Lobby.vue')
     },
     {
       path: '/front',
@@ -36,7 +40,7 @@ export default new Router({
     {
       path: '/battleview',
       name: 'battleview',
-      component: () => import(/* webpackChunkName: "lobby" */ './views/Battleview.vue')
+      component: () => import( /* webpackChunkName: "lobby" */ './views/Battleview.vue')
     }
   ]
 })
