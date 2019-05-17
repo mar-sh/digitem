@@ -5,8 +5,8 @@
             <div class="col-6">
               <form @submit.prevent="userLogin">
                 <div class="form-group">
-                  <h2>LOGIN</h2>
-                  <label for="loginEmail">Email address</label>
+                  <h2 class="txtop">LOGIN</h2>
+                  <label style="color:white" for="loginEmail">Email address</label>
                   <input
                     v-model="loginEmail"
                     type="email"
@@ -16,7 +16,7 @@
                   >
                 </div>
                 <div class="form-group">
-                  <label for="loginPassword">Password</label>
+                  <label style="color:white"  for="loginPassword">Password</label>
                   <input
                     v-model="loginPassword"
                     type="password"
@@ -24,8 +24,8 @@
                     placeholder="Password"
                   >
                 </div>
-                <button type="submit" class="mt-2 btn btn-light">Submit</button>
-                <a href="" @click.prevent="goRegister">Register</a>
+                <button type="submit" class="mt-2 btn btn-dark">Submit</button><br>
+                <a class="txtop"  href="" @click.prevent="goRegister">Register</a>
               </form>
             </div>
             <div class="col"></div>
@@ -73,5 +73,12 @@ export default {
 </script>
 
 <style>
+
+.txtop{
+  font-family: 'Pixel Digivolve';
+  font-size:2rem;
+  color:white;
+  text-align: center;
+}
 
 </style>
