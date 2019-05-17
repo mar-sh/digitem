@@ -5,8 +5,8 @@
             <div class="col-6">
               <form @submit.prevent="userRegister">
                 <div class="form-group">
-                  <h2>REGISTER</h2>
-                  <label for="registerEmail">Email address</label>
+                  <h2 class="txtop">REGISTER</h2>
+                  <label style="color:white"  for="registerEmail">Email address</label>
                   <input
                     v-model="registerEmail"
                     type="email"
@@ -16,7 +16,7 @@
                   >
                 </div>
                 <div class="form-group">
-                  <label for="registerPassword">Password</label>
+                  <label style="color:white"  for="registerPassword">Password</label>
                   <input
                     v-model="registerPassword"
                     type="password"
@@ -24,8 +24,8 @@
                     placeholder="Password"
                   >
                 </div>
-                <button type="submit" class="mt-2 btn btn-light">Submit</button>
-                <a href="" @click.prevent="goLogin">Login</a>
+                <button type="submit" class="mt-2 btn btn-dark">Submit</button><br>
+                <a class="txtop" href="" @click.prevent="goLogin">Login</a>
               </form>
             </div>
             <div class="col"></div>
@@ -61,7 +61,7 @@ export default {
             localStorage.setItem('email', response.user.email);
             this.registerEmail = '';
             this.registerPassword = '';
-            this.$router.push({ name: 'lobby' });
+            this.$router.push({ name: 'waitinglobby' });
           })
           .catch((error) => {
             console.log(error);
@@ -73,5 +73,12 @@ export default {
 </script>
 
 <style>
+
+.txtop{
+  font-family: 'Pixel Digivolve';
+  font-size:2rem;
+  color:white;
+  text-align: center;
+}
 
 </style>

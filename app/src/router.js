@@ -14,14 +14,29 @@ export default new Router({
       component: Home
     },
     {
-      path: '/lobby',
-      name: 'lobby',
-      component: () => import( /* webpackChunkName: "lobby" */ './views/Lobby.vue')
+      path: '/waitinglobby',
+      name: 'waitinglobby',
+      component: () => import(/* webpackChunkName: "WaitingLobby" */ './views/WaitingLobby.vue')
     },
     {
-      path: '/game',
-      name: 'game',
-      component: Game
+      path: '/lobby',
+      name: 'lobby',
+      component: () => import(/* webpackChunkName: "lobby" */ './views/Lobby.vue')
+    },
+    {
+      path: '/front',
+      name: 'front',
+      component: () => import( /* webpackChunkName: 'front' */ './views/Front.vue')
+    },
+    {
+      path: '/room/:id',
+      name: 'room',
+      component: () => import( /* webpackChunkName: 'front' */ './views/Room.vue')
+    },
+    {
+      path: '/battleview',
+      name: 'battleview',
+      component: () => import(/* webpackChunkName: "lobby" */ './views/Battleview.vue')
     }
   ]
 })

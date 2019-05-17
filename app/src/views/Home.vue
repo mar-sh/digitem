@@ -2,7 +2,7 @@
   <div class="landing">
     <div class="univbg border">
       <div style="background-color:black;" class="black container my-5">
-        <h1>Nama Game</h1>
+        <h1 class="titleop">Digitem</h1>
         <login v-if="toggle" @ask-register="goRegister" class="noopacity"></login>
         <register v-if="!toggle" @ask-login="goLogin" class="noopacity"></register>
 
@@ -42,10 +42,18 @@ export default {
 };
 </script>
 
-<style scoped>
+
+<style>
+.titleop {
+  font-family: 'Pixel Digivolve';
+  font-size:6rem;
+  color:white;
+  text-align: center;
+  margin-top:10vh
+
+}
 .black {
   height: 80vh;
-  opacity: 0.8;
 }
 .univbg {
   background: url("../../public/landing1.gif");
