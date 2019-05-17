@@ -17,6 +17,16 @@ export default new Router({
       path: '/lobby',
       name: 'lobby',
       component: () => import(/* webpackChunkName: "lobby" */ './views/Lobby.vue')
-    }
+    },
+    {
+      path: '/front',
+      name: 'front',
+      component: () => import( /* webpackChunkName: 'front' */ './views/Front.vue')
+    },
+    {
+      path: '/room/:id',
+      name: 'room',
+      component: () => import( /* webpackChunkName: 'front' */ './views/Room.vue')
+    },
   ]
 })
