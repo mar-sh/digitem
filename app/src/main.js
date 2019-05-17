@@ -9,7 +9,7 @@ router.beforeEach((to, from, next) => {
   if(to.fullPath === '/')  {
     if(localStorage.getItem('userId')) {
       console.log("You,ve already logged in")
-      next('/lobby')
+      next('/waitinglobby')
     } else 
      next();
   } 
