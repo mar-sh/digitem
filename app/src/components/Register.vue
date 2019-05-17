@@ -3,8 +3,9 @@
           <div class="row">
             <div class="col"></div>
             <div class="col-6">
-              <form @submit.prevent="login">
+              <form @submit.prevent="userRegister">
                 <div class="form-group">
+                  <h2>REGISTER</h2>
                   <label for="registerEmail">Email address</label>
                   <input
                     v-model="registerEmail"
@@ -24,6 +25,7 @@
                   >
                 </div>
                 <button type="submit" class="mt-2 btn btn-light">Submit</button>
+                <a href="" @click.prevent="goLogin">Login</a>
               </form>
             </div>
             <div class="col"></div>
@@ -34,6 +36,8 @@
 </template>
 
 <script>
+import firebase from '@/firebase/index';
+
 export default {
     name : 'register',
     data() {
@@ -42,6 +46,29 @@ export default {
             registerPassword : '',
         }
     },
+    methods: {
+      goLogin() {
+        this.$emit('ask-login');
+      },
+      userRegister() {
+        const auth = firebase.auth;
+
+        auth
+          .createUserWithEmailAndPassword(this.registerEmail, this.registerPassword)
+          .then((response) => {
+            console.log(response);
+            localStorage.setItem('userId', response.user.uid);
+            localStorage.setItem('email', response.user.email);
+            this.registerEmail = '';
+            this.registerPassword = '';
+            this.$router.push({ name: 'lobby' });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+
+    }
 }
 </script>
 

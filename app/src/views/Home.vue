@@ -3,9 +3,10 @@
     <div class="univbg border">
       <div style="background-color:black;" class="black container my-5">
         <h1>Nama Game</h1>
-        <login class="noopacity"></login>
+        <login v-if="toggle" @ask-register="goRegister" class="noopacity"></login>
+        <register v-if="!toggle" @ask-login="goLogin" class="noopacity"></register>
 
-        <button v-on:click.prevent="lobby">Start Now</button>
+        <!-- <button v-on:click.prevent="lobby">Start Now</button> -->
       </div>
     </div>
   </div>
@@ -13,16 +14,30 @@
 
 <script>
 // @ is an alias to /src
-import login from "@/components/Login";
+import login from '@/components/Login'
+import register from '@/components/Register'
+
 export default {
   name: "home",
-  components: { login },
+  components: {
+    login,
+    register
+  },
   data() {
     return {
-      lobby() {
-        this.$router.push("/lobby");
-      }
-    };
+      toggle: false,
+      // lobby() {
+      //   this.$router.push('/lobby')
+      // }
+    }
+  },
+  methods: {
+    goRegister() {
+      this.toggle = false;
+    },
+    goLogin() {
+      this.toggle = true;
+    }
   }
 };
 </script>
