@@ -6,7 +6,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Logout</button>
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" @click.prevent="userLogout">Logout</button>
         </form>
       </div>
     </nav>
@@ -15,7 +15,10 @@
 </template>
 
 <script>
+import firebase from '@/firebase/index'
 import { mapMutations } from "vuex";
+
+const auth = firebase.auth;
 
 export default {
   name: "App",
@@ -30,8 +33,19 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations(["setLogin", "setLogout"])
-  }
+    ...mapMutations(["setLogin", "setLogout"]),
+    userLogout() {
+      auth.signOut().then(() => {
+        console.log('sign out');
+        this.setLogout();
+        localStorage.clear();
+        this.$router.push({ name: 'home' })
+      }).catch((error) => {
+      // An error happened.
+      });
+    },
+  },
+  
 };
 </script>
 
